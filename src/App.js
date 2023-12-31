@@ -2,6 +2,7 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 import { useEffect, useState } from "react"
 import CreateUserComponent from './Components/CreateUserComponent'
+import CreatePresentComponent from './Components/CreatePresentComponent'
 import LoginComponent from './Components/LoginComponent'
 import { backendURL } from "./Globals";
 
@@ -58,6 +59,7 @@ let App = () => {
         <nav>
           <ul className='navbar'>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/createPresent">Create present</Link></li>
             <li><Link to="/disconnect" onClick={disconnect}>Disconnect</Link></li>
           </ul>
         </nav>}
@@ -72,6 +74,9 @@ let App = () => {
         } />
         <Route path="/login" element={
           <LoginComponent setLogin={setLogin} />
+        } />
+        <Route path="/createPresent" element={
+          <CreatePresentComponent />
         } />
       </Routes>
     </div>

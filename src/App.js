@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom'
 import './App.css'
 import CreateUserComponent from './Components/CreateUserComponent'
+import LoginComponent from './Components/LoginComponent'
 
 let App = () => {
   return (
@@ -9,6 +10,7 @@ let App = () => {
         <ul className='navbar'>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/createUser">Register</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </nav>
       <Routes>
@@ -19,6 +21,9 @@ let App = () => {
         } />
         <Route path="/createUser" element={
           <CreateUserComponent />
+        } />
+        <Route path="/login" element={
+          <LoginComponent />
         } />
       </Routes>
     </div>

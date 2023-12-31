@@ -2,8 +2,9 @@ import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { backendURL } from "../Globals"
 
-let LoginComponent = () => {
+let LoginComponent = (props) => {
 
+    let { setLogin } = props
     let [message, setMessage] = useState([])
     let [email, setEmail] = useState("")
     let [password, setPassword] = useState("")
@@ -16,7 +17,7 @@ let LoginComponent = () => {
         setPassword(e.currentTarget.value)
     }
 
-    let clickCreate = async () => {
+    let clickLogin = async () => {
         let response = await fetch(backendURL + "/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -25,17 +26,17 @@ let LoginComponent = () => {
                 password: password
             })
         })
+        let jsonData = await response.json()
         if (response.ok) {
-            navigate("/")
-        } else {
-            let jsonData = await response.json()
-            if (Array.isArray(jsonData.error)) {
-                setMessage(jsonData.error)
-            } else {
-                let finalError = []
-                finalError.push(jsonData.error)
-                setMessage(finalError)
+            if (jsonData.apiKey != null) {
+                localStorage.setItem("apiKey", jsonData.apiKey)
+                localStorage.setItem("idUser", jsonData.id)
+                localStorage.setItem("email", jsonData.email)
+                setLogin(true)
+                navigate("/")
             }
+        } else {
+            setMessage(jsonData.error)
         }
     }
 
@@ -50,7 +51,7 @@ let LoginComponent = () => {
                 <div className='form-group'>
                     <input type='password' placeholder='Password' onChange={changePassword} />
                 </div>
-                <button onClick={clickCreate}>Login</button>
+                <button onClick={clickLogin}>Login</button>
             </div>
         </div>
     )

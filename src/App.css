@@ -84,3 +84,38 @@ button:hover {
   text-align: center;
   color: #f32b2b;
 }
+
+table {
+  width: 100%;
+  margin: 2.5em auto;
+  background: #0000006e;
+}
+
+tr{
+  width: 100%;
+}
+
+td {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
+th {
+  font-weight: bold;
+  background-color: #bebebe;
+  text-align: center;
+}
+
+a:link, a:visited {
+  color: #977356;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #6e5139;
+  background-color: transparent;
+  text-decoration: underline;
+}

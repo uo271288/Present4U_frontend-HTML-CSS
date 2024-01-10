@@ -3,8 +3,9 @@ import './App.css'
 import { useEffect, useState } from "react"
 import CreateUserComponent from './Components/CreateUserComponent'
 import CreatePresentComponent from './Components/CreatePresentComponent'
+import ListPresentsComponent from './Components/ListPresentsComponent'
 import LoginComponent from './Components/LoginComponent'
-import { backendURL } from "./Globals";
+import { backendURL } from "./Globals"
 
 let App = () => {
 
@@ -60,6 +61,7 @@ let App = () => {
           <ul className='navbar'>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/createPresent">Create present</Link></li>
+            <li><Link to="/listPresents">My presents</Link></li>
             <li><Link to="/disconnect" onClick={disconnect}>Disconnect</Link></li>
           </ul>
         </nav>}
@@ -77,6 +79,9 @@ let App = () => {
         } />
         <Route path="/createPresent" element={
           <CreatePresentComponent />
+        } />
+        <Route path="/listPresents" element={
+          <ListPresentsComponent />
         } />
       </Routes>
     </div>

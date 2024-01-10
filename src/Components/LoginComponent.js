@@ -36,7 +36,13 @@ let LoginComponent = (props) => {
                 navigate("/")
             }
         } else {
-            setMessage(jsonData.error)
+            if (Array.isArray(jsonData.error)) {
+                setMessage(jsonData.error)
+            } else {
+                let finalError = []
+                finalError.push(jsonData.error)
+                setMessage(finalError)
+            }
         }
     }
 

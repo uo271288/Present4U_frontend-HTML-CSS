@@ -18,30 +18,42 @@ let ListPresentsComponent = () => {
         }
     }
 
+    let deletePresent = async (id) => {
+        await fetch(backendURL + "/presents/" + id + "?apiKey=" + localStorage.getItem("apiKey"), {
+            method: "DELETE"
+        })
+
+        getPresents()
+    }
+
     return (
         <div className="main-container" style={{ "max-width": "90%" }}>
             <h2>My presents</h2>
-            <table>
+            {presents.length <= 0 && <h3>No presents</h3>}
+            {presents.length > 0 && <table>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Url</th>
                     <th>Price</th>
                     <th>Chosen by</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-                {
-                    presents.map(present => (
-                        <tr>
-                            <td>{present.name}</td>
-                            <td>{present.description}</td>
-                            <td><a href={present.url}>{present.url}</a></td>
-                            <td>{present.price}€</td>
-                            {present.chosenBy === null && <td>-</td>}
-                            {present.chosenBy !== null && <td>{present.chosenBy}</td>}
-                        </tr>
-                    ))
+                {presents.map(present => (
+                    <tr>
+                        <td>{present.name}</td>
+                        <td>{present.description}</td>
+                        <td><a href={present.url}>{present.url}</a></td>
+                        <td>{present.price}€</td>
+                        {present.chosenBy === null && <td>-</td>}
+                        {present.chosenBy !== null && <td>{present.chosenBy}</td>}
+                        <td><a href="/listPresents"><img alt="delete" onClick={() => deletePresent(present.id)} src="redCross.png" /></a></td>
+                    </tr>
+                ))
                 }
             </table>
+            }
         </div>
     )
 }

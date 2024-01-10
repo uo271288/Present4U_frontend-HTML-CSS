@@ -91,7 +91,7 @@ table {
   background: #0000006e;
 }
 
-tr{
+tr {
   width: 100%;
 }
 
@@ -108,7 +108,8 @@ th {
   text-align: center;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: #977356;
   background-color: transparent;
   text-decoration: none;

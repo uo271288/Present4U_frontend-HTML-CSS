@@ -30,7 +30,7 @@ let ListPresentsComponent = () => {
     return (
         <div className="main-container" style={{ "max-width": "90%" }}>
             <h2>My presents</h2>
-            {presents.length <= 0 && <h3>No presents</h3>}
+            {presents.length <= 0 && <h3 className="errorMessage">No presents</h3>}
             {presents.length > 0 && <table>
                 <tr>
                     <th>Name</th>

@@ -5,6 +5,7 @@ import CreateUserComponent from './Components/CreateUserComponent'
 import CreatePresentComponent from './Components/CreatePresentComponent'
 import ListPresentsComponent from './Components/ListPresentsComponent'
 import ModifyPresentComponent from './Components/ModifyPresentComponent'
+import ListFriendsComponent from './Components/ListFriendsComponent'
 import LoginComponent from './Components/LoginComponent'
 import { backendURL } from "./Globals"
 
@@ -63,6 +64,7 @@ let App = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/createPresent">Create present</Link></li>
             <li><Link to="/listPresents">My presents</Link></li>
+            <li><Link to="/listFriends">My friends</Link></li>
             <li><Link to="/disconnect" onClick={disconnect}>Disconnect</Link></li>
           </ul>
         </nav>}
@@ -86,6 +88,9 @@ let App = () => {
         } />
         <Route path="/modifyPresent/:presentId" element={
           <ModifyPresentComponent />
+        } />
+        <Route path="/listFriends" element={
+          <ListFriendsComponent />
         } />
       </Routes>
     </div>

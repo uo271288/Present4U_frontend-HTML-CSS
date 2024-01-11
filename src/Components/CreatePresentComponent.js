@@ -47,7 +47,7 @@ let CreatePresentComponent = () => {
 
     return (
         <div className="main-container">
-            <h2>Create a present for a friend</h2>
+            <h2>Create a present</h2>
             {message != null && message.map(e => { return <p className="errorMessage">{e}</p> })}
             <div className="center-box">
                 <div className='form-group'>

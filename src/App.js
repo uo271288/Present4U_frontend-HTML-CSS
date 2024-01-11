@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import CreateUserComponent from './Components/CreateUserComponent'
 import CreatePresentComponent from './Components/CreatePresentComponent'
 import ListPresentsComponent from './Components/ListPresentsComponent'
+import ModifyPresentComponent from './Components/ModifyPresentComponent'
 import LoginComponent from './Components/LoginComponent'
 import { backendURL } from "./Globals"
 
@@ -82,6 +83,9 @@ let App = () => {
         } />
         <Route path="/listPresents" element={
           <ListPresentsComponent />
+        } />
+        <Route path="/modifyPresent/:presentId" element={
+          <ModifyPresentComponent />
         } />
       </Routes>
     </div>

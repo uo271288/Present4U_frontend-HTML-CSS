@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { backendURL } from "../Globals"
+import { Link } from 'react-router-dom'
 
 let ListPresentsComponent = () => {
 
@@ -48,7 +49,8 @@ let ListPresentsComponent = () => {
                         <td>{present.price}€</td>
                         {present.chosenBy === null && <td>-</td>}
                         {present.chosenBy !== null && <td>{present.chosenBy}</td>}
-                        <td><a href="/listPresents"><img alt="delete" onClick={() => deletePresent(present.id)} src="redCross.png" /></a></td>
+                        <td><Link to="/listPresents"><img alt="delete" onClick={() => deletePresent(present.id)} src="redCross.png" /></Link></td>
+                        <td><Link to={"/modifyPresent/" + present.id}><img alt="modify" src="greenPencil.png" /></Link></td>
                     </tr>
                 ))
                 }

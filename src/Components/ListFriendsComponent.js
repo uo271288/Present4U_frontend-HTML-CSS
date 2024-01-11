@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { backendURL } from "../Globals"
+import { Link } from 'react-router-dom'
 
 let ListFriendsComponent = () => {
 
@@ -18,6 +19,14 @@ let ListFriendsComponent = () => {
         }
     }
 
+    let deleteFriend = async (id) => {
+        await fetch(backendURL + "/friends/" + id + "?apiKey=" + localStorage.getItem("apiKey"), {
+            method: "DELETE"
+        })
+
+        getFriends()
+    }
+
     return (
         <div className="main-container" >
             <h2>My friends</h2>
@@ -25,10 +34,12 @@ let ListFriendsComponent = () => {
             {friends.length > 0 && <table>
                 <tr>
                     <th>Email</th>
+                    <th></th>
                 </tr>
                 {friends.map(friend => (
                     <tr>
                         <td>{friend.emailFriend}</td>
+                        <td><Link to="/listFriends"><img alt="delete" onClick={() => deleteFriend(friend.emailFriend)} src="redCross.png" /></Link></td>
                     </tr>
                 ))
                 }

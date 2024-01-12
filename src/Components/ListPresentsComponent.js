@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 let ListPresentsComponent = () => {
 
     let [presents, setPresents] = useState([])
+    let [message, setMessage] = useState([])
 
     useEffect(() => {
         getPresents()
@@ -13,9 +14,17 @@ let ListPresentsComponent = () => {
     let getPresents = async () => {
         let response = await fetch(backendURL + "/presents?apiKey=" + localStorage.getItem("apiKey"))
 
+        let jsonData = await response.json()
         if (response.ok) {
-            let jsonData = await response.json()
             setPresents(jsonData)
+        } else {
+            if (Array.isArray(jsonData.error)) {
+                setMessage(jsonData.error)
+            } else {
+                let finalError = []
+                finalError.push(jsonData.error)
+                setMessage(finalError)
+            }
         }
     }
 
@@ -31,6 +40,7 @@ let ListPresentsComponent = () => {
         <div className="main-container" style={{ "max-width": "90%" }}>
             <h2>My presents</h2>
             {presents.length <= 0 && <h3 className="errorMessage">No presents</h3>}
+            {message != null && message.map(e => { return <p className="errorMessage">{e}</p> })}
             {presents.length > 0 && <table>
                 <tr>
                     <th>Name</th>

@@ -1,36 +1,23 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { backendURL } from "../Globals"
 
 let CreatePresentComponent = () => {
 
     let [message, setMessage] = useState([])
-    let [name, setName] = useState("")
-    let [description, setDescription] = useState("")
-    let [url, setUrl] = useState("")
-    let [price, setPrice] = useState(0.0)
-
-    let changeName = (e) => {
-        setName(e.currentTarget.value)
-    }
-    let changeDescription = (e) => {
-        setDescription(e.currentTarget.value)
-    }
-    let changeUrl = (e) => {
-        setUrl(e.currentTarget.value)
-    }
-    let changePrice = (e) => {
-        setPrice(e.currentTarget.value)
-    }
+    let name = useRef("")
+    let description = useRef("")
+    let url = useRef("")
+    let price = useRef(0.0)
 
     let clickCreate = async () => {
         let response = await fetch(backendURL + "/presents?apiKey=" + localStorage.getItem("apiKey"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                name: name,
-                description: description,
-                url: url,
-                price: price
+                name: name.current.value,
+                description: description.current.value,
+                url: url.current.value,
+                price: price.current.value
             })
         })
         if (!response.ok) {
@@ -43,6 +30,11 @@ let CreatePresentComponent = () => {
                 setMessage(finalError)
             }
         }
+
+        name.current.value = ""
+        description.current.value = ""
+        url.current.value = ""
+        price.current.value = ""
     }
 
     return (
@@ -51,16 +43,16 @@ let CreatePresentComponent = () => {
             {message != null && message.map(e => { return <p className="errorMessage">{e}</p> })}
             <div className="center-box">
                 <div className='form-group'>
-                    <input type='text' placeholder='Name' onChange={changeName} />
+                    <input ref={name} type='text' placeholder='Name' />
                 </div>
                 <div className='form-group'>
-                    <input type='text' placeholder='Description' onChange={changeDescription} />
+                    <input ref={description} type='text' placeholder='Description' />
                 </div>
                 <div className='form-group'>
-                    <input type='text' placeholder='https://example.com' onChange={changeUrl} />
+                    <input ref={url} type='text' placeholder='https://example.com' />
                 </div>
                 <div className='form-group'>
-                    <input type='number' step=".01" placeholder='10.0' onChange={changePrice} />
+                    <input ref={price} type='number' step=".01" placeholder='10.0' />
                 </div>
                 <button onClick={clickCreate}>Create present</button>
             </div>

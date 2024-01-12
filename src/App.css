@@ -120,3 +120,20 @@ a:hover {
   background-color: transparent;
   text-decoration: underline;
 }
+
+.friend-form-group {
+  display: flex;
+  align-items: center;
+}
+
+.add-friend-input {
+  padding: 10px;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.add-friend-button {
+  padding: 10px;
+  margin-left: 10px;
+  width: 12%;
+}

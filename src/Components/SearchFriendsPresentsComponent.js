@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { backendURL } from "../Globals"
+import { Link } from 'react-router-dom'
 
 let SearchFriendsPresentsComponent = () => {
 
@@ -37,6 +38,24 @@ let SearchFriendsPresentsComponent = () => {
         }
     }
 
+    let selectPresent = async (id) => {
+        let response = await fetch(backendURL + "/presents/" + id + "?apiKey=" + localStorage.getItem("apiKey"), {
+            method: "PUT"
+        })
+        if (!response.ok) {
+            let jsonData = await response.json()
+            if (Array.isArray(jsonData)) {
+                setMessage(jsonData)
+            } else {
+                let finalError = []
+                finalError.push(jsonData)
+                setMessage(finalError)
+            }
+        }
+
+        searchPresents()
+    }
+
     return (
         <div className="main-container" style={{ "max-width": "90%" }}>
             {presents.length <= 0 &&
@@ -59,7 +78,8 @@ let SearchFriendsPresentsComponent = () => {
                     </tr>
                     {presents.map(present => (
                         <tr>
-                            <td>{present.name}</td>
+                            {present.chosenBy !== null && <td>{present.name}</td>}
+                            {present.chosenBy === null && <td onClick={() => selectPresent(present.id)}><Link to="/searchFriendsPresents">{present.name}</Link></td>}
                             <td>{present.description}</td>
                             <td><a href={present.url}>{present.url}</a></td>
                             <td>{present.price}€</td>

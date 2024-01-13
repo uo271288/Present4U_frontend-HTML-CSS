@@ -14,14 +14,12 @@ let SearchFriendsPresentsComponent = () => {
 
     let changeFriendEmail = (e) => {
         setFriendEmail(e.currentTarget.value)
-        console.log(friendEmail)
     }
 
     let searchPresents = async () => {
         if (friendEmail !== "") {
             let response = await fetch(backendURL + "/presents?userEmail=" + friendEmail + "&apiKey=" + localStorage.getItem
                 ("apiKey"))
-            console.log(friendEmail)
 
             let jsonData = await response.json()
             if (response.ok) {

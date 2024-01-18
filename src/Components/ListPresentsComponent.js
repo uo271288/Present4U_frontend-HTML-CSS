@@ -44,6 +44,7 @@ let ListPresentsComponent = () => {
             {presents.length > 0 && <table>
                 <tr>
                     <th>Name</th>
+                    <th>List name</th>
                     <th>Description</th>
                     <th>Url</th>
                     <th>Price</th>
@@ -54,6 +55,7 @@ let ListPresentsComponent = () => {
                 {presents.map(present => (
                     <tr>
                         <td>{present.name}</td>
+                        <td>{present.listName}</td>
                         <td>{present.description}</td>
                         <td><a href={present.url}>{present.url}</a></td>
                         <td>{present.price}€</td>

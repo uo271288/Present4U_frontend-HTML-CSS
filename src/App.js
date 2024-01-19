@@ -7,6 +7,7 @@ import ListPresentsComponent from './Components/ListPresentsComponent'
 import ModifyPresentComponent from './Components/ModifyPresentComponent'
 import ListFriendsComponent from './Components/ListFriendsComponent'
 import SearchFriendsPresentsComponent from './Components/SearchFriendsPresentsComponent'
+import CreateListComponent from './Components/CreateListComponent'
 import LoginComponent from './Components/LoginComponent'
 import { backendURL } from "./Globals"
 
@@ -64,6 +65,7 @@ let App = () => {
           <ul className='navbar'>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/createPresent">Create present</Link></li>
+            <li><Link to="/createList">Create list</Link></li>
             <li><Link to="/listPresents">My presents</Link></li>
             <li><Link to="/listFriends">My friends</Link></li>
             <li><Link to="/searchFriendsPresents">Search friend's presents</Link></li>
@@ -96,6 +98,9 @@ let App = () => {
         } />
         <Route path="/searchFriendsPresents" element={
           <SearchFriendsPresentsComponent />
+        } />
+        <Route path="/createList" element={
+          <CreateListComponent />
         } />
       </Routes>
     </div>

@@ -130,10 +130,10 @@ a:hover {
   padding: 10px;
   flex: 1;
   box-sizing: border-box;
+  margin-right: 8px;
 }
 
 .add-friend-button {
   padding: 10px;
-  margin-left: 10px;
   width: 12%;
 }

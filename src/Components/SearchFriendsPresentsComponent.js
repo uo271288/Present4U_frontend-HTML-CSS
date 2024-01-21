@@ -6,19 +6,16 @@ let SearchFriendsPresentsComponent = () => {
 
     let [presents, setPresents] = useState([])
     let [friendEmail, setFriendEmail] = useState("")
+    let [listName, setListName] = useState("")
     let [message, setMessage] = useState([])
 
     useEffect(() => {
         searchPresents()
     }, [])
 
-    let changeFriendEmail = (e) => {
-        setFriendEmail(e.currentTarget.value)
-    }
-
     let searchPresents = async () => {
         if (friendEmail !== "") {
-            let response = await fetch(backendURL + "/presents?userEmail=" + friendEmail + "&apiKey=" + localStorage.getItem
+            let response = await fetch(backendURL + "/presents?listName=" + listName + "&userEmail=" + friendEmail + "&apiKey=" + localStorage.getItem
                 ("apiKey"))
 
             let jsonData = await response.json()
@@ -58,7 +55,8 @@ let SearchFriendsPresentsComponent = () => {
         <div className="main-container" style={{ "max-width": "90%" }}>
             {presents.length <= 0 &&
                 <div className='friend-form-group'>
-                    <input className="add-friend-input" type='text' placeholder='Email' onChange={changeFriendEmail} />
+                    <input className="add-friend-input" type='text' placeholder='Email' onChange={(e) => { setFriendEmail(e.currentTarget.value) }} />
+                    <input className="add-friend-input" type='text' placeholder='Wishlist' onChange={(e) => { setListName(e.currentTarget.value) }} />
                     <button className="add-friend-button" onClick={() => searchPresents()}>Search presents</button>
                 </div>
             }
@@ -69,6 +67,7 @@ let SearchFriendsPresentsComponent = () => {
                 {presents.length > 0 && <table>
                     <tr>
                         <th>Name</th>
+                        <th>List name</th>
                         <th>Description</th>
                         <th>Url</th>
                         <th>Price</th>
@@ -78,6 +77,7 @@ let SearchFriendsPresentsComponent = () => {
                         <tr>
                             {present.chosenBy !== null && <td>{present.name}</td>}
                             {present.chosenBy === null && <td onClick={() => selectPresent(present.id)}><Link to="/searchFriendsPresents">{present.name}</Link></td>}
+                            <td>{present.listName}</td>
                             <td>{present.description}</td>
                             <td><a href={present.url}>{present.url}</a></td>
                             <td>{present.price}€</td>

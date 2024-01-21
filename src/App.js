@@ -9,6 +9,7 @@ import ListFriendsComponent from './Components/ListFriendsComponent'
 import SearchFriendsPresentsComponent from './Components/SearchFriendsPresentsComponent'
 import CreateListComponent from './Components/CreateListComponent'
 import LoginComponent from './Components/LoginComponent'
+import ListListsComponent from './Components/ListListsComponent'
 import { backendURL } from "./Globals"
 
 let App = () => {
@@ -68,6 +69,7 @@ let App = () => {
             <li><Link to="/createList">Create list</Link></li>
             <li><Link to="/listPresents">My presents</Link></li>
             <li><Link to="/listFriends">My friends</Link></li>
+            <li><Link to="/listLists">My lists</Link></li>
             <li><Link to="/searchFriendsPresents">Search friend's presents</Link></li>
             <li><Link to="/disconnect" onClick={disconnect}>Disconnect</Link></li>
           </ul>
@@ -101,6 +103,9 @@ let App = () => {
         } />
         <Route path="/createList" element={
           <CreateListComponent />
+        } />
+        <Route path="/listLists" element={
+          <ListListsComponent />
         } />
       </Routes>
     </div>

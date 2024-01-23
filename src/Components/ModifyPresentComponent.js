@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { backendURL } from "../Globals"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 let ModifyPresentComponent = () => {
 
     let [present, setPresent] = useState({})
     let [message, setMessage] = useState([])
     let { presentId } = useParams()
+    let navigate = useNavigate()
 
     useEffect(() => {
         getPresent()
@@ -42,7 +43,7 @@ let ModifyPresentComponent = () => {
             body: JSON.stringify({ ...present })
         })
         if (response.ok) {
-
+            navigate("/listPresents")
         } else {
             let jsonData = await response.json()
             if (Array.isArray(jsonData)) {
